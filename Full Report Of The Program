@@ -1,0 +1,36 @@
+The given code is organized into different packages and consists of several classes and methods. I will explain each package and its corresponding classes and methods:
+
+Package: com.enviro.assessment.grad001.thabangmmako.controller
+
+ImageController.java: This class is a REST controller that handles HTTP requests related to images.
+Method: getImages(Model model) - Handles the HTTP GET request to retrieve all images. It retrieves the list of profiles from the accountProfileRepository and adds it to the model. It returns the "images" template.
+Method: getHttpImageLink(String name, String surname, String fileName) - Handles the HTTP GET request to retrieve a specific image. It finds the accountProfile based on the name and surname, constructs the file path using the image folder path and file name, and returns the FileSystemResource of the image file.
+Package: com.enviro.assessment.grad001.thabangmmako.model
+
+AccountProfile.java: This class represents the AccountProfile entity with its properties and getters/setters.
+
+AccountProfileRepository.java: This interface extends JpaRepository and provides methods to access the AccountProfile entity from the database. It includes the method findByNameAndSurname(String name, String surname) to find an accountProfile by name and surname.
+
+Package: com.enviro.assessment.grad001.thabangmmako.service
+
+FileParser.java: This interface defines the contract for parsing files and converting data to images.
+
+Method: parseCSV(File csvFile) - Parses the CSV file, converts the data to images, creates image links, and saves the accountProfile in the database.
+Method: convertCSVDataToImage(String base64ImageData, String imageFormat) - Converts the base64 encoded image data to a file with the specified image format and saves it in the image folder.
+Method: createImageLink(File fileImage) - Creates an HTTP image link from the given image file.
+FileParserImpl.java: This class implements the FileParser interface and provides the implementation for parsing CSV files and converting data to images.
+
+Constructor: Initializes the accountProfileRepository and imageFolderPath.
+Method: parseCSV(File csvFile) - Reads the lines from the CSV file, splits the data, converts the data to images using convertCSVDataToImage, creates image links using createImageLink, and saves the accountProfile in the database.
+Method: convertCSVDataToImage(String base64ImageData, String imageFormat) - Decodes the base64 encoded image data, creates a unique file name, creates the image file in the image folder, and writes the decoded data to the file.
+Method: createImageLink(File imageFile) - Returns the URI of the given image file.
+Package: com.enviro.assessment.grad001.thabangmmako
+
+Application.java: This is the main class that starts the Spring Boot application.
+
+Constructor: Initializes the fileParser, accountProfileRepository, and imageFolderPath.
+Method: main(String[] args) - Starts the Spring Boot application.
+Method: init() - Initializes the image folder, clears existing data from the database, specifies the CSV file path, and calls the parseCSV method to parse the CSV file.
+AppProperties.java: This class is a configuration properties class that specifies the properties for the application, including the image folder path.
+
+Note: There is also an HTML template file included, which is not part of any package. It is used to display the images retrieved from the server.
