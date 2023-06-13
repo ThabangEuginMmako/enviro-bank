@@ -2,6 +2,7 @@ package com.enviro.assessment.grad001.thabangmmako;
 
 import com.enviro.assessment.grad001.thabangmmako.model.AccountProfileRepository;
 import com.enviro.assessment.grad001.thabangmmako.service.FileParser;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -17,7 +18,7 @@ public class Application {
 	private final AccountProfileRepository accountProfileRepository;
 	private final String imageFolderPath;
 
-	public Application(FileParser fileParser, AccountProfileRepository accountProfileRepository, String imageFolderPath) {
+	public Application(FileParser fileParser, AccountProfileRepository accountProfileRepository, @Value("${image.folder.path}") String imageFolderPath) {
 		this.fileParser = fileParser;
 		this.accountProfileRepository = accountProfileRepository;
 		this.imageFolderPath = imageFolderPath;

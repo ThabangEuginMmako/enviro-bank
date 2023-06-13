@@ -5,7 +5,7 @@ import java.net.URI;
 public interface FileParser {
 
     void parseCSV(File csvFile);
-    File convertCSVDataToImage(String base64ImageData);
+    //File convertCSVDataToImage(String base64ImageData);
 
     File convertCSVDataToImage(String base64ImageData, String imageFormat);
 

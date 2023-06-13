@@ -2,6 +2,8 @@ package com.enviro.assessment.grad001.thabangmmako.service;
 
 import com.enviro.assessment.grad001.thabangmmako.model.AccountProfileRepository;
 import org.apache.commons.io.FileUtils;
+import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,12 +13,15 @@ import java.util.Base64;
 import java.util.List;
 import java.util.UUID;
 
+
+@Service
+
 public class FileParserImpl implements FileParser {
 
     private final AccountProfileRepository accountProfileRepository;
     private final String imageFolderPath;
 
-    public FileParserImpl(AccountProfileRepository accountProfileRepository, String imageFolderPath) {
+    public FileParserImpl(AccountProfileRepository accountProfileRepository, @Value("${image.folder.path}") String imageFolderPath) {
         this.accountProfileRepository = accountProfileRepository;
         this.imageFolderPath = imageFolderPath;
     }
@@ -47,10 +52,10 @@ public class FileParserImpl implements FileParser {
         }
     }
 
-    @Override
-    public File convertCSVDataToImage(String base64ImageData) {
-        return null;
-    }
+//    @Override
+//    public File convertCSVDataToImage(String base64ImageData) {
+//        return null;
+//    }
 
     @Override
     public File convertCSVDataToImage(String base64ImageData, String imageFormat) {
